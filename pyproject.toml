@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "finance-control"
+version = "0.1.0"
+description = ""
+authors = ["Aidar Rachmatullin <nedopolz@gmail.com>"]
+readme = "README.md"
+packages = [{include = "finance_control"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.78.0"
+uvicorn = {extras = ["standard"], version = "^0.18.2"}
+loguru = "^0.6.0"
+SQLAlchemy = "^1.4.39"
+asyncpg = "^0.26.0"
+databases = "^0.6.0"
+python-jose = "^3.3.0"
+nanoid = "^2.0.0"
+pyhumps = "^3.7.2"
+alembic = "^1.8.0"
+pydantic = {extras = ["email"], version = "^1.9.1"}
+passlib = "^1.7.4"
+bcrypt = "^3.2.2"
+python-multipart = "^0.0.5"
+psycopg2-binary = "^2.9.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
