@@ -8,7 +8,6 @@ from src.app.api.v1.services.services import get_auth_service
 from src.app.api.v1.schemas.exceptions import ErrorMessage
 from src.app.api.v1.schemas.user import UserCreate, UserOut
 
-
 router = APIRouter()
 
 
@@ -40,9 +39,9 @@ async def sign_up(data: UserCreate, auth_service=Depends(get_auth_service)):
     },
 )
 async def patient_sign_up(
-    data: UserCreate,
-    auth_service=Depends(get_auth_service),
-    current_user=Depends(get_current_user),
+        data: UserCreate,
+        auth_service=Depends(get_auth_service),
+        current_user=Depends(get_current_user),
 ):
     user = await auth_service.find_by_email(data.email)
     if user:
@@ -62,8 +61,8 @@ async def patient_sign_up(
     "/login", description="Вход в систему. Тут получаются access и refresh токены."
 )
 async def login(
-    request: OAuth2PasswordRequestForm = Depends(),
-    auth_service=Depends(get_auth_service),
+        request: OAuth2PasswordRequestForm = Depends(),
+        auth_service=Depends(get_auth_service),
 ):
     user = await auth_service.find_by_email(email=request.username)
     if not user or not auth_service.verify_password(request.password, user.password):
