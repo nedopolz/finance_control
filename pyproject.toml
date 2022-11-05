@@ -22,7 +22,6 @@ pydantic = {extras = ["email"], version = "^1.9.1"}
 passlib = "^1.7.4"
 bcrypt = "^3.2.2"
 python-multipart = "^0.0.5"
-psycopg2-binary = "^2.9.5"
 
 
 [build-system]
