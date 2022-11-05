@@ -1,16 +1,16 @@
-import pydantic.main
+import datetime
+import io
+from typing import List
+
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse, StreamingResponse
 from starlette import status
 
 from src.app.api.v1.dependencies import paginator
-from src.app.security import get_current_user
-from src.app.api.v1.schemas.exceptions import ErrorMessage, responses_exceptions
-from src.app.api.v1.services.services import get_auth_service, get_device_service
+from src.app.api.v1.schemas.exceptions import ErrorMessage
 from src.app.api.v1.schemas.user import UserOut, UserOptional, AddDevice
-from typing import List
-import io
-import datetime
+from src.app.api.v1.services.services import get_auth_service, get_device_service
+from src.app.security import get_current_user
 
 router = APIRouter()
 
@@ -28,9 +28,9 @@ async def users(auth_service=Depends(get_auth_service), page=Depends(paginator))
     "/patients", description="Получить всех пациентов, привязанных текущему врачу."
 )
 async def patients(
-    auth_service=Depends(get_auth_service),
-    current_user=Depends(get_current_user),
-    page=Depends(paginator),
+        auth_service=Depends(get_auth_service),
+        current_user=Depends(get_current_user),
+        page=Depends(paginator),
 ):
     return await auth_service.get_patients(user_id=current_user.user_id, page=page)
 
@@ -61,7 +61,7 @@ async def user_by_id(user_id: int, auth_service=Depends(get_auth_service)):
     },
 )
 async def change_credentials(
-    user_id: int, data: UserOptional, auth_service=Depends(get_auth_service)
+        user_id: int, data: UserOptional, auth_service=Depends(get_auth_service)
 ):
     if data.email:
         emails_exists = await auth_service.find_by_email(data.email)
@@ -98,9 +98,9 @@ async def user(user_id: int, auth_service=Depends(get_auth_service)):
 
 @router.get("/export/{user_id}", description="Скачать csv файл.")
 async def export(
-    user_id: int,
-    current_user=Depends(get_current_user),
-    auth_service=Depends(get_auth_service),
+        user_id: int,
+        current_user=Depends(get_current_user),
+        auth_service=Depends(get_auth_service),
 ):
     user = await auth_service.get_by_id(user_id)
     df = pandas.DataFrame(UserOut(**user).dict(), index=[0])
@@ -125,9 +125,9 @@ async def export(
     responses={status.HTTP_200_OK: {"status": "ok"}},
 )
 async def add_device_to_user(
-    data: AddDevice,
-    current_user=Depends(get_current_user),
-    device_service=Depends(get_device_service),
+        data: AddDevice,
+        current_user=Depends(get_current_user),
+        device_service=Depends(get_device_service),
 ):
     if await device_service.add_user(current_user, data.uid):
         return JSONResponse({"status": "ok"})
