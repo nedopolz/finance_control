@@ -11,19 +11,19 @@ from src.app.db import database
 from src.app.api.v1.routers import accounts
 
 
-def get_application():
-    middleware = [
-        Middleware(
-            CORSMiddleware,
-            allow_origins=["*"],
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
-    ]
-    fastapi_app = FastAPI(
-        title="Finance Control", version="1.0.0", middleware=middleware
-    )
-    return fastapi_app
+# def get_application():
+#     middleware = [
+#         Middleware(
+#             CORSMiddleware,
+#             allow_origins=["*"],
+#             allow_methods=["*"],
+#             allow_headers=["*"],
+#         )
+#     ]
+#     fastapi_app = FastAPI(
+#         title="Finance Control", version="1.0.0", middleware=middleware
+#     )
+#     return fastapi_app
 
 
 app = FastAPI(

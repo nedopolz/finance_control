@@ -6,11 +6,12 @@ class CamelModel(BaseModel):
     class Config:
         alias_generator = camelize
         allow_population_by_field_name = True
+        orm_mode = True
 
 
-class Status(CamelModel):
-    # id: int
-    status_code: str
-    # name: str
+class StatusSchema(CamelModel):
+    id: int
+    code: str
+    name: str
 
 
