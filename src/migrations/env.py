@@ -25,9 +25,11 @@ database_pass = os.getenv("DATABASE_PASSWORD")
 database_user = os.getenv("DATABASE_USER")
 database_name = os.getenv("DATABASE_NAME")
 
-config.set_main_option('sqlalchemy.url',
-                       f"postgresql+asyncpg://{database_user}:{database_pass}@{database_host}"
-                       f":{database_port}/{database_name}")
+config.set_main_option(
+    "sqlalchemy.url",
+    f"postgresql+asyncpg://{database_user}:{database_pass}@{database_host}"
+    f":{database_port}/{database_name}",
+)
 
 # add your model's MetaData object here
 # for 'autogenerate' support

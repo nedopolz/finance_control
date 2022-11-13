@@ -8,5 +8,8 @@ class CamelModel(BaseModel):
         allow_population_by_field_name = True
 
 
-class User(CamelModel):
-    external_id: str
+class Type(CamelModel):
+    id: int
+    code: str
+    name: str
+

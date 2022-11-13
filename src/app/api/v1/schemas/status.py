@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from humps import camelize
 from pydantic.main import BaseModel
 
@@ -10,6 +8,9 @@ class CamelModel(BaseModel):
         allow_population_by_field_name = True
 
 
-class Measurement(CamelModel):
-    measurement_value: float
-    time: datetime
+class Status(CamelModel):
+    # id: int
+    status_code: str
+    # name: str
+
+
