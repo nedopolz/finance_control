@@ -1,5 +1,5 @@
-from src.app.api.v1.models.models import Status, AccountType, Currency
-from src.app.api.v1.services.defaults_db_values import account_status, account_type, currency
+from src.app.api.v1.models.models import Status, AccountType, Currency, OperationType
+from src.app.api.v1.services.defaults_db_values import account_status, account_type, currency, operation_type
 
 
 class DBStartUp:
@@ -18,3 +18,4 @@ class DBStartUp:
         await self.check_table_for_defaults(Status, account_status)
         await self.check_table_for_defaults(AccountType, account_type)
         await self.check_table_for_defaults(Currency, currency)
+        await self.check_table_for_defaults(OperationType, operation_type)

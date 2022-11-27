@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, MetaData, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, MetaData, Float, DateTime, Date
 from sqlalchemy.orm import declarative_base, relationship
 
 
@@ -54,6 +54,7 @@ class Account(Base):
     currency = relationship("Currency", back_populates="account")
     account_type = relationship("AccountType", back_populates="account")
     status = relationship("Status", back_populates="accounts")
+    operations = relationship("Operation", back_populates="account")
 
 
 class Category(Base):
@@ -65,8 +66,9 @@ class Category(Base):
     operation_type_id = Column(Integer, ForeignKey("operation_types.id"), nullable=False)
     operation_type = relationship("OperationType", back_populates="categories")
     user = relationship("User", back_populates="categories")
-    parent = relationship("Category", back_populates="children")
     children = relationship("Category", back_populates="parent")
+    parent = relationship("Category", remote_side=[id], back_populates="children")
+    operations = relationship("Operation", back_populates="category")
 
 
 class OperationType(Base):
@@ -74,6 +76,7 @@ class OperationType(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     code = Column(String)
     name = Column(String)
+    categories = relationship("Category", back_populates="operation_type")
     operations = relationship("Operation", back_populates="operation_type")
 
 
@@ -83,7 +86,7 @@ class Operation(Base):
     account_id = Column(Integer, ForeignKey("accounts.id"), nullable=False)
     category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
     type_id = Column(Integer, ForeignKey("operation_types.id"), nullable=False)
-    date = Column(Integer, nullable=False)
+    datetime = Column(DateTime, nullable=False)
     amount = Column(Float, nullable=False)
     account = relationship("Account", back_populates="operations")
     category = relationship("Category", back_populates="operations")

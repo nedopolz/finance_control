@@ -13,3 +13,9 @@ currency = [
     {"name": "RUB", "symbol": "₽", "code": "rub"},
     {"name": "USD", "symbol": "$", "code": "usd"},
 ]
+
+
+operation_type = [
+    {"name": "Income", "code": "income"},
+    {"name": "Expense", "code": "expense"},
+]

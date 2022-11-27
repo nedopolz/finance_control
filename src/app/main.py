@@ -8,26 +8,28 @@ from loguru import logger
 from src.app.api.v1.services.db_startup_ini import DBStartUp
 from src.app.db import database
 
-from src.app.api.v1.routers import accounts
+from src.app.api.v1.routers import accounts, categories, operations
 
 
-# def get_application():
-#     middleware = [
-#         Middleware(
-#             CORSMiddleware,
-#             allow_origins=["*"],
-#             allow_methods=["*"],
-#             allow_headers=["*"],
-#         )
-#     ]
-#     fastapi_app = FastAPI(
-#         title="Finance Control", version="1.0.0", middleware=middleware
-#     )
-#     return fastapi_app
+def get_application():
+    middleware = [
+        Middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
+    ]
+    fastapi_app = FastAPI(
+        title="Finance Control", version="1.0.0", middleware=middleware
+    )
+    return fastapi_app
 
 
-app = FastAPI(title="Finance Control", version="1.0.0")
+app = get_application()
 app.include_router(accounts.router, prefix="/api/v1/accounts", tags=["accounts"])
+app.include_router(categories.router, prefix="/api/v1/categories", tags=["categories"])
+app.include_router(operations.router, prefix="/api/v1/operations", tags=["operations"])
 
 
 @app.on_event("startup")
