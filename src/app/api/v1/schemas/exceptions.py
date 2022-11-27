@@ -1,8 +1,8 @@
 from fastapi import HTTPException
-from starlette import status
-from pydantic.main import BaseModel
-from pydantic import Field
 from humps import camelize
+from pydantic import Field
+from pydantic.main import BaseModel
+from starlette import status
 
 
 class CamelModel(BaseModel):
@@ -20,9 +20,7 @@ unauthorised_exception = HTTPException(
     detail="Не авторизован",
     headers={"WWW-Authenticate": "Bearer"},
 )
-credentials_exception = HTTPException(
-    status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid credentials"
-)
+credentials_exception = HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid credentials")
 
 invalid_token_exception = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,

@@ -51,9 +51,7 @@ def downgrade() -> None:
         "currencies",
         sa.Column("account_id", sa.INTEGER(), autoincrement=False, nullable=True),
     )
-    op.create_foreign_key(
-        "currencies_account_id_fkey", "currencies", "accounts", ["account_id"], ["id"]
-    )
+    op.create_foreign_key("currencies_account_id_fkey", "currencies", "accounts", ["account_id"], ["id"])
     op.add_column(
         "accounts",
         sa.Column("user_id", sa.INTEGER(), autoincrement=False, nullable=True),
@@ -61,9 +59,7 @@ def downgrade() -> None:
     op.drop_constraint(None, "accounts", type_="foreignkey")
     op.drop_constraint(None, "accounts", type_="foreignkey")
     op.drop_constraint(None, "accounts", type_="foreignkey")
-    op.create_foreign_key(
-        "accounts_user_id_fkey", "accounts", "users", ["user_id"], ["id"]
-    )
+    op.create_foreign_key("accounts_user_id_fkey", "accounts", "users", ["user_id"], ["id"])
     op.drop_column("accounts", "currency_id")
     op.drop_column("accounts", "type_id")
     op.drop_column("accounts", "status_id")

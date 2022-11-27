@@ -1,9 +1,9 @@
 from humps import camelize
 from pydantic.main import BaseModel
 
-from src.app.api.v1.schemas.currency import Currency
+from src.app.api.v1.schemas.currency import CurrencySchema
 from src.app.api.v1.schemas.status import StatusSchema
-from src.app.api.v1.schemas.type import Type
+from src.app.api.v1.schemas.type import TypeSchema
 
 
 class CamelModel(BaseModel):
@@ -13,11 +13,11 @@ class CamelModel(BaseModel):
         orm_mode = True
 
 
-class Account(CamelModel):
+class AccountSchema(CamelModel):
     id: int
-    status: StatusSchema
-    # type: Type
-    # currency: Currency
+    Status: StatusSchema
+    AccountType: TypeSchema
+    Currency: CurrencySchema
 
 
 class CreateAccount(CamelModel):

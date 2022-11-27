@@ -8,7 +8,7 @@ class DBStartUp:
 
     async def check_table_for_defaults(self, table, defaults):
         for default in defaults:
-            query = table.__table__.select().where(table.code == default['code'])
+            query = table.__table__.select().where(table.code == default["code"])
             result = await self.db.fetch_one(query)
             if not result:
                 query = table.__table__.insert().values(**default)

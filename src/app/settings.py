@@ -11,9 +11,7 @@ class Settings(BaseSettings):
     database_host: str = Field(os.getenv("DATABASE_HOST"), env="DATABASE_HOST")
     database_port: int = Field(os.getenv("DATABASE_PORT"), env="DATABASE_PORT")
     database_user: str = Field(os.getenv("DATABASE_USER"), env="DATABASE_USER")
-    database_password: str = Field(
-        os.getenv("DATABASE_PASSWORD"), env="DATABASE_PASSWORD"
-    )
+    database_password: str = Field(os.getenv("DATABASE_PASSWORD"), env="DATABASE_PASSWORD")
     database_name: str = Field(os.getenv("DATABASE_NAME"), env="DATABASE_NAME")
     secret_key: str = Field(os.getenv("SECRET_KEY"), env="SECRET_KEY")
     access_token_expires_minutes: int = Field(os.getenv("ACCESS_TOKEN_EXPIRES_MINUTES"))

@@ -1,12 +1,5 @@
-from humps import camelize
-from pydantic.main import BaseModel
+from src.app.api.v1.schemas.account import CamelModel
 
 
-class CamelModel(BaseModel):
-    class Config:
-        alias_generator = camelize
-        allow_population_by_field_name = True
-
-
-class User(CamelModel):
+class UserSchema(CamelModel):
     external_id: str

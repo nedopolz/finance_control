@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, MetaData
+from sqlalchemy import Column, Integer, String, ForeignKey, MetaData, Float
 from sqlalchemy.orm import declarative_base, relationship
 
-from src.app.db import database
 
 metadata = MetaData()
 Base = declarative_base(metadata=metadata)
@@ -13,6 +12,7 @@ class User(Base):
     external_id = Column(String, nullable=True)
     tg_id = Column(Integer, nullable=True)
     accounts = relationship("Account", back_populates="user")
+    categories = relationship("Category", back_populates="user")
 
     def __repr__(self):
         return f"tg_id:{self.tg_id}, external_id:{self.external_id}"
@@ -54,3 +54,37 @@ class Account(Base):
     currency = relationship("Currency", back_populates="account")
     account_type = relationship("AccountType", back_populates="account")
     status = relationship("Status", back_populates="accounts")
+
+
+class Category(Base):
+    __tablename__ = "categories"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String)
+    parent_id = Column(Integer, ForeignKey("categories.id"), nullable=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    operation_type_id = Column(Integer, ForeignKey("operation_types.id"), nullable=False)
+    operation_type = relationship("OperationType", back_populates="categories")
+    user = relationship("User", back_populates="categories")
+    parent = relationship("Category", back_populates="children")
+    children = relationship("Category", back_populates="parent")
+
+
+class OperationType(Base):
+    __tablename__ = "operation_types"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    code = Column(String)
+    name = Column(String)
+    operations = relationship("Operation", back_populates="operation_type")
+
+
+class Operation(Base):
+    __tablename__ = "operations"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=False)
+    category_id = Column(Integer, ForeignKey("categories.id"), nullable=False)
+    type_id = Column(Integer, ForeignKey("operation_types.id"), nullable=False)
+    date = Column(Integer, nullable=False)
+    amount = Column(Float, nullable=False)
+    account = relationship("Account", back_populates="operations")
+    category = relationship("Category", back_populates="operations")
+    operation_type = relationship("OperationType", back_populates="operations")

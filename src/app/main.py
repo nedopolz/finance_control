@@ -26,9 +26,7 @@ from src.app.api.v1.routers import accounts
 #     return fastapi_app
 
 
-app = FastAPI(
-        title="Finance Control", version="1.0.0"
-    )
+app = FastAPI(title="Finance Control", version="1.0.0")
 app.include_router(accounts.router, prefix="/api/v1/accounts", tags=["accounts"])
 
 
