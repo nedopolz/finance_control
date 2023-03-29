@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "bot"
+version = "0.1.0"
+description = ""
+authors = ["Aidar Rachmatullin <nedopolz@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^2.23.1"
+alembic = "^1.8.1"
+loguru = "^0.6.0"
+asyncpg = "^0.26.0"
+databases = "^0.6.0"
+alembic = "^1.8.0"
+sqlalchemy = "^1.4.43"
+black = "^22.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
