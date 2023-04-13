@@ -9,7 +9,8 @@ import (
 
 func init() {
 	initializers.LoadEnvVariables()
-	initializers.ConnectToDB()
+	initializers.ConnectToKafka()
+	initializers.InitUserManager()
 	initializers.SyncDB()
 }
 

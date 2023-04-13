@@ -13,7 +13,8 @@ import (
 )
 
 type UserManager struct {
-	DB *gorm.DB
+	DB    *gorm.DB
+	Kafka KafkaService
 }
 
 func (m *UserManager) CreateUser(userdata schemas.UserSignUp) CustomError {
@@ -34,6 +35,7 @@ func (m *UserManager) CreateUser(userdata schemas.UserSignUp) CustomError {
 			VisibleError: "not unique",
 		}
 	}
+	m.Kafka.SendMessage(user)
 	return CustomError{}
 }
 

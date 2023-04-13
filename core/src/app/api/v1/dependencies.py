@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends, Header
 from src.app.api.v1.schemas.user import UserSchema
 from src.app.api.v1.services.DBservices import get_userDB_service
-from src.app.db import async_session
+from src.app.loaders import async_session
 
 
 async def get_current_user(

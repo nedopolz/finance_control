@@ -62,9 +62,11 @@ class OperationService:
 def get_account_service():
     return AccountService()
 
+
 @lru_cache()
 def get_category_service():
     return CategoryService()
+
 
 @lru_cache()
 def get_operation_service():

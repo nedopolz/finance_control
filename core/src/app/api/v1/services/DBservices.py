@@ -8,11 +8,11 @@ from src.app.api.v1.models.models import User, Account, Status, Currency, Accoun
     Operation
 from src.app.api.v1.schemas.account import AccountSchema
 from src.app.api.v1.schemas.сategory import CategorySchema
-from src.app.db import database
 
 
 class UserService:
     def __init__(self):
+        from src.app.loaders import database
         self.database = database
 
     async def get_user_by_external_id(self, external_id: str):
@@ -20,9 +20,15 @@ class UserService:
         user = await self.database.fetch_one(query)
         return user
 
+    async def create_user(self, external_id):
+        query = User.__table__.insert().values(external_id=external_id)
+        user = await self.database.execute(query)
+        return user
+
 
 class AccountService:
     def __init__(self):
+        from src.app.loaders import database
         self.database = database
 
     async def get_accounts_by_user_id(self, user_id: int, session: AsyncSession) -> List[AccountSchema]:
@@ -52,6 +58,7 @@ class AccountService:
 
 class CategoryService:
     def __init__(self):
+        from src.app.loaders import database
         self.database = database
 
     async def get_category_by_user_id(self, user_id: int, session: AsyncSession) -> List[CategorySchema]:
@@ -80,6 +87,7 @@ class CategoryService:
 
 class OperationService:
     def __init__(self):
+        from src.app.loaders import database
         self.database = database
 
     async def create_operation(self, params: dict):
@@ -106,4 +114,3 @@ def get_categoryDB_service():
 @lru_cache()
 def get_operationDB_service():
     return OperationService()
-

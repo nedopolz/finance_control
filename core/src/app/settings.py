@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     database_user: str = Field(os.getenv("DATABASE_USER"), env="DATABASE_USER")
     database_password: str = Field(os.getenv("DATABASE_PASSWORD"), env="DATABASE_PASSWORD")
     database_name: str = Field(os.getenv("DATABASE_NAME"), env="DATABASE_NAME")
+    kafka_host: str = Field(os.getenv("KAFKA_HOST"), env="KAFKA_HOST")
+    kafka_topic: str = Field(os.getenv("KAFKA_TOPIC"), env="KAFKA_TOPIC")
 
     @property
     def database_url(self):

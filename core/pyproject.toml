@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Aidar Rachmatullin <nedopolz@gmail.com>"]
 readme = "README.md"
-packages = [{include = "finance_control"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

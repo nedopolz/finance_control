@@ -1,0 +1,8 @@
+syntax = "proto3";
+option go_package = "./greeting;greeting";
+
+message UserCreatedMessage {
+    string externalID = 1;
+    string email = 2;
+    string username = 3;
+}

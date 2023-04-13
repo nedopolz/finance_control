@@ -13,7 +13,7 @@ var DB *gorm.DB
 
 var UserService service.UserManager
 
-func ConnectToDB() {
+func InitUserManager() {
 	var err error
 	var dsn string
 
@@ -26,9 +26,8 @@ func ConnectToDB() {
 
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
-	UserService = service.UserManager{DB: DB}
-
 	if err != nil {
 		logrus.Panic("Failed to connect to db")
 	}
+	UserService = service.UserManager{DB: DB, Kafka: KafkaService}
 }
